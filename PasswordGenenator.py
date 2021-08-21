@@ -1,9 +1,6 @@
 import random
-# allow digits, allow numbers, allow characters, choose size and choose if should repeat
-#check if size too big for non repeated passwords
-# if user chose to use none "ha ha, very funny"
-#lower() for answears
 
+# Lists of characters
 num = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 let = ["a", "b", "c", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 cha = ["!", "@", "/", "#", "$", "%", "&", "*", "ç", "(", ")"]
@@ -11,10 +8,12 @@ size = 0
 
 repeat_request = False
 
+# All configs are false by default
 num_request = "n"
 let_request = "n"
 cha_request = "n"
 
+# Statements for each while
 a = True
 b = True
 c = True
@@ -22,6 +21,7 @@ d = True
 e = True
 f = True
 
+# To check if the user chose at least one of the criteria
 criteria = 0
 
 while f == True:
@@ -34,7 +34,7 @@ while f == True:
             if num_request == "y":
                 criteria += 1
         else:
-            print("Invalid characer, please type Y or N")
+            print("Invalid character, please type Y or N")
 
     while b == True:
         let_request = input("Do you want letters?(Y/N) ")
@@ -45,7 +45,7 @@ while f == True:
             if let_request == "y":
                 criteria += 1
         else:
-            print("Invalid characer, please type Y or N")
+            print("Invalid character, please type Y or N")
 
     while c == True:
         cha_request = input("Do you want especial characters?(Y/N) ")
@@ -56,8 +56,9 @@ while f == True:
             if cha_request == "y":
                 criteria += 1
         else:
-            print("Invalid characer, please type Y or N")
+            print("Invalid character, please type Y or N")
 
+    # Checking if the user chose any of the criteria
     if criteria > 0:
         f = False
     else:
@@ -73,7 +74,7 @@ while d == True:
         print("You chose:", repeat_request)
         d = False
     else:
-        print("invalid characer, please type Y or N")
+        print("Invalid character, please type Y or N")
 
 password = []
 ammount = 0
@@ -97,7 +98,7 @@ while e == True:
             e = False
         else:
             if size > ammount:
-                print("Please choosea smaller number, it's not possible to\nmake a password this long without repeating a characters")
+                print("Please choose a smaller number, it's not possible to\nmake a password this long without repeating a characters")
             else:
                 e = False
     except ValueError:
