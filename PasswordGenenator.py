@@ -8,7 +8,7 @@ size = 0
 
 repeat_request = False
 
-# All configs are false by default
+# All configs are false by adefault
 num_request = "n"
 let_request = "n"
 cha_request = "n"
