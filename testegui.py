@@ -113,23 +113,48 @@ def generate():
                 while len(password_chars) < slider.get():
                     if upp.get() > 0:
                         for i in range(random.randint(1, portion)):
-                            letter = random.choice(string.ascii_letters)
-                            while letter in password_chars:
+                            a = 0
+                            while a == 0:
                                 letter = random.choice(string.ascii_letters)
-                            password_chars += letter.upper()
+                                letter = letter.upper()
+                                if str(letter) not in password_chars:
+                                    password_chars += letter.upper()
+                                    a = 1
                     if low.get() > 0:
                         for j in range(random.randint(1, portion)):
-                            letter = random.choice(string.ascii_letters)
-                            password_chars += letter.lower()
+                            a = 0
+                            while a == 0:
+                                letter = random.choice(string.ascii_letters)
+                                letter = letter.lower()
+                                if str(letter) not in password_chars:
+                                    password_chars += letter.lower()
+                                    a = 1
                     if num.get() > 0:
                         for k in range(random.randint(1, portion)):
-                            password_chars += str(random.randint(0, 9))
+                            a = 0
+                            while a == 0:
+                                letter = str(random.randint(0, 9))
+                                if letter not in password_chars:
+                                    password_chars += str(letter)
+                                    a = 1    
                     if spec.get() > 0:
                         for l in range(random.randint(1, portion)):
-                            password_chars += random.choice(cha) 
-                    generated = password_chars  
+                            a = 0
+                            while a == 0:
+                                letter = str(random.choice(cha))
+                                if letter not in password_chars:
+                                    password_chars += str(letter)
+                                    a = 1 
+
+                while len(password_chars) > slider.get():
+                    password_chars = password_chars[:-1]
+                print(password_chars)
+                
+                generated = ''.join(random.sample(password_chars, len(password_chars)))
+
+                
                 DisplayPassword.delete(0, END)
-                DisplayPassword.insert(0, generated)         
+                DisplayPassword.insert(0, generated)        
                 
     else:
         print("one_criteria")
