@@ -76,6 +76,9 @@ def slider_range():
         elif spec.get() == 1 and num.get() + upp.get() + low.get() == 0:
             maximum = 18
             slider.config(to = maximum)
+        elif spec.get() + num.get() == 2 and upp.get() + low.get() == 0:
+            maximum = 28
+            slider.config(to = maximum)
         else:
             maximum = 30
             slider.config(to = maximum)
