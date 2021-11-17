@@ -3,10 +3,6 @@ import string
 from tkinter import *
 from PIL import ImageTk, Image
 
-# AVISO DE CRITERIA
-# ALINHAR SLIDER E BOTOES
-# FUNCIONALIDADE DONT REPEAT
-
 root = Tk()
 root.geometry("450x300")
 root.title("Password Generator")
@@ -19,7 +15,7 @@ minimum = 1
 maximum = 30
 criteria = 0
 password = ""
-cha = ["!", "@", "/", "\\", "#", "$", "%", "&", "*", "ç", "(", ")", "[", "]", "{", "}", "+", "-"]
+cha = ["!", "@", "/", "\\", "#", "$", "%", "&", "*", "ç", "(", ")", "[", "]", "{", "}", "+", "-"] 
 
 checkboxes = Frame(root)
 checkboxes.pack(pady = 0)
@@ -94,8 +90,11 @@ c.config(command = slider_range)
 d.config(command = slider_range)
 e.config(command = slider_range)
 
+# warns the user about missing criteria
 line6 = Frame(root)
 line6.pack(pady = 0, padx = 10)
+warn_user = Label(line6, text = "", fg = "RED")
+warn_user.pack(pady=10)
 
 # copy password to your clipboard
 def copy():
@@ -110,10 +109,12 @@ def generate():
     spec_used = ""
 
     minimum = num.get() + spec.get() + upp.get() + low.get()
+
     if num.get() + spec.get() + upp.get() + low.get() + rep.get() > 0:
         if rep.get() > 0 and num.get() + spec.get() + upp.get() + low.get() < 1:
-            print("onemore_criteria")
+            warn_user.config(text = "Please choose at least 1 more criteria")
         else:
+            warn_user.config(text = "")
             password_chars = ""
 
             # if the characters can repeat
@@ -140,12 +141,12 @@ def generate():
                 generated = ''.join(random.sample(password_chars,\
                     len(password_chars)))
 
-                
                 DisplayPassword.delete(0, END)
                 DisplayPassword.insert(0, generated)
 
             else:
                 # Characters won't repeat
+                password_chars = ""
                 portion = (slider.get()//minimum)
                 while len(password_chars) < slider.get():
                     if upp.get() > 0:
@@ -191,8 +192,7 @@ def generate():
                                     a = 1
                                 elif len(password_chars) >= 9 and upp.get() +\
                                     low.get() + spec.get() == 0:
-                                    a = 1
-                                
+                                    a = 1  
                     if spec.get() > 0:
                         for l in range(random.randint(1, portion)):
                             a = 0
@@ -214,12 +214,11 @@ def generate():
                 generated = ''.join(random.sample(password_chars,\
                     len(password_chars)))
 
-                
                 DisplayPassword.delete(0, END)
                 DisplayPassword.insert(0, generated)        
                 
     else:
-        print("one_criteria")
+        warn_user.config(text = "Please choose at least 1 criteria")
 
 buttonGen = Button(line5, text = "Copy", command = copy)
 buttonGen.config(font=("HELVETICA", 13, "bold"))
@@ -228,6 +227,5 @@ buttonGen.grid(row = 0, column = 1, pady = 0, padx = 10)
 buttonGen = Button(line5, text = "Generate", command = generate)
 buttonGen.config(font=("HELVETICA", 13, "bold"))
 buttonGen.grid(row = 0, column = 2, pady = 0, padx = 10)
-
 
 root.mainloop()
